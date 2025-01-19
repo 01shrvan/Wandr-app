@@ -28,4 +28,3 @@ export async function getUser(request: NextRequest) {
   
   return verifyToken(token)
 }
-
