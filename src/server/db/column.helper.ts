@@ -12,4 +12,7 @@ export const timestamp_now = () =>
     .default(sql`(CURRENT_TIMESTAMP)`)
     .notNull();
 
-export const user_id = () => text().references(() => user.id);
+export const user_id = () =>
+  text()
+    .references(() => user.id)
+    .notNull();

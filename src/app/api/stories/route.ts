@@ -1,38 +1,40 @@
-import { getUser } from "@/lib/auth";
-import { executeQuery } from "@/lib/db";
+import { travelStoriesInput } from "@/lib/definitions";
+import { getUser } from "@/server/auth";
 import { db } from "@/server/db";
 import { travelStories } from "@/server/db/schema";
-import { nanoid } from "nanoid";
+import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
 export async function POST(request: NextRequest) {
   try {
     const { userId } = await getUser(request);
-    const { title, story, visitedLocation, imageUrl, visitedDate } =
-      await request.json();
+    const body: z.infer<typeof travelStoriesInput> = await request.json();
+    const validation = travelStoriesInput.safeParse(body);
 
-    if (!title || !story || !visitedLocation || !imageUrl || !visitedDate) {
+    if (!validation.success) {
+      console.log(validation.error.format());
       return NextResponse.json(
         { error: true, message: "All fields are required." },
         { status: 400 }
       );
     }
 
-    const id = nanoid();
-    const visitedLocationJson = JSON.stringify(visitedLocation);
-
-    // await executeQuery(
-    //   `INSERT INTO travel_stories
-    //    (id, title, story, visitedLocation, imageUrl, visitedDate, userId)
-    //    VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    //   [id, title, story, visitedLocationJson, imageUrl, new Date(parseInt(visitedDate)).toISOString(), userId]
-    // )
+    await db.insert(travelStories).values({
+      image_url: body.imageUrl,
+      story: body.story,
+      title: body.title,
+      visited_location: body.visitedLocation,
+      visited_date: new Date(body.visitedDate),
+      user_id: userId,
+    });
 
     return NextResponse.json({
       error: false,
       message: "Story added successfully.",
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: true, message: "Failed to add story." },
       { status: 500 }
@@ -81,11 +83,9 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    const result = await executeQuery(query, params);
-    const stories = result.rows.map((story) => ({
-      ...story,
-      visitedLocation: JSON.parse(story.visitedLocation as string),
-    }));
+    const stories = await db.query.travelStories.findMany({
+      where: eq(travelStories.user_id, userId),
+    });
 
     return NextResponse.json({ stories });
   } catch (error) {
