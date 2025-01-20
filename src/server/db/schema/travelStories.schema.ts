@@ -13,8 +13,6 @@ export const travelStories = sqliteTable("travel_stories", {
   is_favorite: integer({ mode: "boolean" }).notNull().default(false),
   user_id: user_id(),
   image_url: text().notNull(),
-  visited_date: text()
-    .default(sql`(CURRENT_DATE)`)
-    .notNull(),
+  visited_date: integer({ mode: "timestamp_ms" }).notNull(),
   created_at: timestamp_now(),
 });
