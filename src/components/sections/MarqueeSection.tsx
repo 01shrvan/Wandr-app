@@ -56,8 +56,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ img, name, username, body }) =>
         <figure
             className={cn(
                 "relative w-80 cursor-pointer overflow-hidden rounded-xl border p-4",
-                "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-                "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+                "border-gray-200 bg-gray-50 hover:bg-gray-100",
+                "dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
             )}
         >
             <div className="flex flex-row items-center gap-2">
@@ -66,7 +66,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ img, name, username, body }) =>
                     <figcaption className="text-sm font-medium dark:text-white">
                         {name}
                     </figcaption>
-                    <p className="text-xs font-medium dark:text-white/40">{username}</p>
+                    <p className="text-xs font-medium dark:text-gray-400">{username}</p>
                 </div>
             </div>
             <blockquote className="mt-2 text-sm leading-relaxed">{body}</blockquote>
@@ -76,7 +76,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ img, name, username, body }) =>
 
 function MarqueeSection() {
     return (
-        <section className="relative mt-[355px] flex flex-col items-center justify-center overflow-hidden rounded-lg py-8">
+        <section className="relative mt-8 flex flex-col items-center justify-center overflow-hidden rounded-lg py-8">
             <Marquee pauseOnHover className="[--duration:30s]">
                 {firstRow.map((review) => (
                     <ReviewCard key={review.username} {...review} />
@@ -87,11 +87,9 @@ function MarqueeSection() {
                     <ReviewCard key={review.username} {...review} />
                 ))}
             </Marquee>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
-        </section>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-gray-50 dark:from-gray-800"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-gray-50 dark:from-gray-800"></div></section>
     );
 }
 
 export default MarqueeSection;
-
