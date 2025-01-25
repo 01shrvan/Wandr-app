@@ -1,40 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from 'next/font/google';
-import "./globals.css";
-import localFont from "next/font/local";
+import "./globals.css"
+import { Inter, Newsreader } from "next/font/google"
 
-export const metadata: Metadata = {
-  title: "Wandr",
-  description: "Wandr is a minimalist, privacy-first web app that lets you document, organize and cherish your travel experiences—without distractions."
-};
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+})
 
-const inter = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700"] });
-
-export const gilroyBold = localFont({
-  src: [
-    {
-      path: '../../public/font/gilroy_bold.ttf',
-      weight: '700',
-    }
-  ]
-});
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-serif",
+})
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" className="h-full">
-      <body
-        className={`${inter.className} antialiased min-h-screen bg-gradient-radial from-blue-300 via-purple-200 to-indigo-300 overflow-x-hidden`}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(255,200,124,0.15)_0%,rgba(252,251,255,0)_100%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(124,245,255,0.15)_0%,rgba(252,251,255,0)_100%)] pointer-events-none"></div>
-        <div className="relative z-10 p-4 md:p-6 lg:p-10">
-          {children}
-        </div>
-      </body>
+    <html lang="en" className={`${inter.className} ${newsreader.variable}`}>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
+
