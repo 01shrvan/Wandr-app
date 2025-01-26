@@ -1,5 +1,5 @@
-import "./globals.css"
-import { Inter, Newsreader } from "next/font/google"
+import "@/app/globals.css"
+import { Inter, Newsreader } from 'next/font/google'
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,4 +23,3 @@ export default function RootLayout({
     </html>
   )
 }
-

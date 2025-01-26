@@ -43,7 +43,10 @@ export default function LandingPage() {
   ]
 
   return (
-    <main className="relative h-[100dvh] overflow-hidden bg-neutral-950 selection:bg-neutral-800 selection:text-neutral-200 flex flex-col justify-center">
+    <main className="relative flex min-h-[100dvh] flex-col bg-neutral-950 selection:bg-neutral-800 selection:text-neutral-200">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 opacity-50" />
+
       {/* Enhanced cursor gradient effect */}
       <div
         className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
@@ -53,22 +56,24 @@ export default function LandingPage() {
       />
 
       {/* Minimal navigation */}
-      <nav className="absolute left-0 right-0 top-0 z-40 flex items-center justify-between p-4 sm:p-6 md:p-8">
+      <nav className="relative z-40 flex items-center justify-between p-4">
         <motion.div
-          className="flex items-center space-x-3"
+          className="flex items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <Link href="/" className="flex items-center space-x-3 group">
-            <img
-              src="/images/logo.svg"
-              alt="Wandr Logo"
-              className="h-5 w-5 transition-transform group-hover:rotate-12"
-            />
-            <span className="font-serif text-lg tracking-[0.2em] text-neutral-400 sm:text-base uppercase group-hover:text-neutral-300">
-              wλndr
-            </span>
+          <Link href="/" className="inline-flex items-center group">
+            <div className="flex items-center">
+              <img
+                src="/images/logo.svg"
+                alt="Wandr Logo"
+                className="h-7 w-7 transition-transform group-hover:rotate-12"
+              />
+              <span className="ml-3 font-serif text-lg tracking-[0.2em] text-neutral-400 sm:text-base uppercase group-hover:text-neutral-300">
+                wλndr
+              </span>
+            </div>
           </Link>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
@@ -81,85 +86,113 @@ export default function LandingPage() {
         </motion.div>
       </nav>
 
-      {/* Main content centered vertically and horizontally */}
-      <div className="flex flex-col items-center justify-center flex-grow w-full px-4">
-        {/* Hero section - centered and adjusted spacing */}
+      {/* Main content */}
+      <div className="relative z-10 flex flex-1 flex-col">
+        {/* Hero section */}
         <motion.div
-          className="relative z-10 text-center max-w-2xl"
+          className="flex flex-1 flex-col items-center justify-center px-4 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="font-serif text-4xl font-extralight tracking-tight text-neutral-200 sm:text-5xl md:text-6xl">
-            Memories Never Fade
-          </h1>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-neutral-500 sm:mt-6">
-            Your digital time capsule. Capture, relive, and cherish every moment of your journey.
-          </p>
+          <div className="max-w-2xl">
+            <h1 className="font-serif text-4xl font-extralight tracking-tight text-neutral-200 sm:text-5xl md:text-6xl">
+              Memories Never Fade
+            </h1>
+            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-neutral-500">
+              Your digital time capsule. Capture, relive, and cherish every moment of your journey.
+            </p>
 
-          <motion.div className="mt-6 sm:mt-8">
-            <button className="group relative text-sm text-neutral-300 transition-colors hover:text-neutral-100 sm:text-base">
-              <span className="flex items-center">
-                start exploring
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
-              </span>
-              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
-            </button>
-          </motion.div>
+            <motion.div className="mt-6">
+              <button className="group relative text-sm text-neutral-300 transition-colors hover:text-neutral-100">
+                <span className="flex items-center">
+                  start exploring
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                </span>
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
+              </button>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Feature section */}
+        <motion.div
+          className="relative z-10 px-4 pb-20 pt-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <div className="mx-auto max-w-[90rem]">
+            <div className="flex flex-col gap-8 sm:grid sm:grid-cols-3 sm:gap-8">
+              {features.map((feature, index) => {
+                const Icon = feature.icon
+                return (
+                  <motion.div
+                    key={feature.title}
+                    className="group relative"
+                    onMouseEnter={() => setHoveredFeature(feature.title)}
+                    onMouseLeave={() => setHoveredFeature(null)}
+                  >
+                    <motion.div
+                      className="relative overflow-hidden py-2"
+                      animate={{
+                        y: hoveredFeature === feature.title ? -2 : 0,
+                      }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {/* Vertical line for visual separation on desktop */}
+                      {index !== features.length - 1 && (
+                        <div className="absolute right-0 top-1/2 hidden h-12 w-px -translate-y-1/2 bg-neutral-800/50 sm:block" />
+                      )}
+
+                      <div className="relative">
+                        <div className="flex items-center justify-center space-x-3">
+                          <Icon className="h-4 w-4 text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400" />
+                          <h3 className="text-sm font-light text-neutral-400 transition-colors duration-300 group-hover:text-neutral-300">
+                            {feature.title}
+                          </h3>
+                        </div>
+
+                        <div className="relative mt-2 px-2 text-center sm:px-4">
+                          <p className="text-xs font-extralight text-neutral-600 transition-colors duration-300 group-hover:text-neutral-500">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
         </motion.div>
       </div>
 
-      {/* Feature section - improved responsive grid with absolute positioning */}
-      <motion.div
-        className="absolute bottom-8 left-0 right-0 w-full px-6 sm:bottom-12 md:bottom-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
+      {/* Enhanced footer */}
+      <motion.footer
+        className="relative z-40 border-t border-neutral-900 px-4 py-3"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.4 }}
       >
         <div className="mx-auto max-w-[90rem]">
-          <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-0">
-            {features.map((feature, index) => {
-              const Icon = feature.icon
-              return (
-                <motion.div
-                  key={feature.title}
-                  className="group relative"
-                  onMouseEnter={() => setHoveredFeature(feature.title)}
-                  onMouseLeave={() => setHoveredFeature(null)}
-                >
-                  <motion.div
-                    className="relative overflow-hidden py-2"
-                    animate={{
-                      y: hoveredFeature === feature.title ? -2 : 0,
-                    }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {/* Vertical line for visual separation on desktop */}
-                    {index !== features.length - 1 && (
-                      <div className="absolute right-0 top-1/2 hidden h-12 w-px -translate-y-1/2 bg-neutral-800/50 sm:block" />
-                    )}
-
-                    <div className="relative">
-                      <div className="flex items-center justify-center space-x-3">
-                        <Icon className="h-4 w-4 text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400" />
-                        <h3 className="text-sm font-light text-neutral-400 transition-colors duration-300 group-hover:text-neutral-300">
-                          {feature.title}
-                        </h3>
-                      </div>
-
-                      <div className="relative mt-2 px-4 text-center">
-                        <p className="text-xs font-extralight text-neutral-600 transition-colors duration-300 group-hover:text-neutral-500">
-                          {feature.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )
-            })}
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
+            <p className="text-[10px] font-light leading-relaxed text-neutral-700 sm:text-xs max-w-[280px] sm:max-w-xs text-center sm:text-left">
+              Wandr is a digital journal that transforms your travel memories into beautifully curated stories
+            </p>
+            <p className="text-[10px] font-light tracking-widest text-neutral-600 sm:text-xs text-center sm:text-right">
+              built with <span className="text-neutral-500">♡</span> by
+              <Link
+                href="https://www.x.com/01shrvan"
+                target="_blank"
+                className="text-neutral-500 transition-colors hover:text-neutral-300 ml-1 hover:underline"
+              >
+                shrvan
+              </Link>
+            </p>
           </div>
         </div>
-      </motion.div>
+      </motion.footer>
     </main>
   )
 }
