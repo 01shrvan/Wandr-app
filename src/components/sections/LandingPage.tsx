@@ -26,18 +26,18 @@ export default function LandingPage() {
 
   const features = [
     {
-      title: "calendar view",
-      description: "Track your travels like never before",
+      title: "Calendar View",
+      description: "Effortlessly track your adventures in a beautifully organized timeline.",
       icon: Calendar,
     },
     {
-      title: "media gallery",
-      description: "Your memories, beautifully organized",
+      title: "Media Gallery",
+      description: "Your photos and videos, all in one stunning, curated collection.",
       icon: Image,
     },
     {
-      title: "smart search",
-      description: "Find any moment in seconds",
+      title: "Smart Search",
+      description: "Find that special moment instantly with intelligent search capabilities.",
       icon: Search,
     },
   ]
@@ -67,16 +67,16 @@ export default function LandingPage() {
                 alt="Wandr Logo"
                 className="h-7 w-7 transition-transform "
               />
-              <span className="ml-3 font-serif text-lg tracking-[0.2em] text-neutral-400 sm:text-base uppercase group-hover:text-neutral-300">
-                wλndr
+              <span className="ml-3 font-serif text-lg tracking-[0.2em] text-neutral-300 sm:text-base uppercase group-hover:text-neutral-200">
+                wandr
               </span>
             </div>
           </Link>
         </motion.div>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-          <button className="group text-xs text-neutral-500 transition-colors hover:text-neutral-300 sm:text-sm">
+          <button className="group text-xs text-neutral-400 transition-colors hover:text-neutral-200 sm:text-sm">
             <span className="relative">
-              sign in
+              Sign In
               <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
             </span>
           </button>
@@ -91,17 +91,17 @@ export default function LandingPage() {
           transition={{ duration: 1 }}
         >
           <div className="max-w-2xl">
-            <h1 className="font-serif text-4xl font-normal tracking-tight text-neutral-200 sm:text-5xl md:text-6xl">
-              Memories Never Fade
+            <h1 className="font-serif text-4xl font-semibold tracking-tight text-neutral-100 sm:text-5xl md:text-6xl">
+              Relive Your Best Moments
             </h1>
-            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-neutral-500">
-              Your digital time capsule. Capture, relive, and cherish every moment of your journey.
+            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-neutral-400">
+              A space where your journeys come alive. Relive, cherish, and share your stories like never before.
             </p>
 
             <motion.div className="mt-6">
               <button className="group relative text-sm text-neutral-300 transition-colors hover:text-neutral-100">
                 <span className="flex items-center">
-                  start exploring
+                  Start Your Journey
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                 </span>
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
@@ -140,14 +140,14 @@ export default function LandingPage() {
 
                       <div className="relative">
                         <div className="flex items-center justify-center space-x-3">
-                          <Icon className="h-4 w-4 text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400" />
-                          <h3 className="text-sm font-light text-neutral-400 transition-colors duration-300 group-hover:text-neutral-300">
+                          <Icon className="h-5 w-5 text-neutral-400 transition-colors duration-300 group-hover:text-neutral-300" />
+                          <h3 className="text-sm font-medium text-neutral-300 transition-colors duration-300 group-hover:text-neutral-200">
                             {feature.title}
                           </h3>
                         </div>
 
                         <div className="relative mt-2 px-2 text-center sm:px-4">
-                          <p className="text-xs font-extralight text-neutral-600 transition-colors duration-300 group-hover:text-neutral-500">
+                          <p className="text-xs font-light text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400">
                             {feature.description}
                           </p>
                         </div>
@@ -162,30 +162,29 @@ export default function LandingPage() {
       </div>
 
       <motion.footer
-        className="relative z-40 border-t border-neutral-900 px-4 py-3"
+        className="relative z-40 border-t border-neutral-800 px-4 py-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.4 }}
       >
         <div className="mx-auto max-w-[90rem]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[10px] font-light leading-relaxed text-neutral-700 sm:text-xs text-center sm:text-left">
-              Wandr is a digital journal that transforms your travel memories into beautifully curated stories
+            <p className="text-[10px] font-light leading-relaxed text-neutral-600 sm:text-xs text-center sm:text-left">
+              Wandr: Your digital journal, built to treasure every memory you create.
             </p>
-            <p className="text-[10px] font-light tracking-widest text-neutral-600 sm:text-xs text-center sm:text-right">
-              built with <span className="text-neutral-500">♡</span> by
+            <p className="text-[10px] font-light tracking-widest text-neutral-500 sm:text-xs text-center sm:text-right">
+              Made with <span className="text-neutral-400">♡</span> by
               <Link
                 href="https://www.x.com/01shrvan"
                 target="_blank"
-                className="text-neutral-500 transition-colors hover:text-neutral-300 ml-1 hover:underline"
+                className="text-neutral-400 transition-colors hover:text-neutral-200 ml-1 hover:underline"
               >
-                shrvan
+                Shrvan
               </Link>
             </p>
           </div>
         </div>
       </motion.footer>
-
     </main>
   )
 }

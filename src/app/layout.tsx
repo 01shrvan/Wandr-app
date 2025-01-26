@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/logo.svg",
-        width: 1200,
-        height: 630,
+        width: 200,
+        height: 50,
         alt: "Wandr Logo - Your Digital Travel Journal",
       },
     ],
