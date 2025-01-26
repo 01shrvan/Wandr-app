@@ -1,11 +1,11 @@
-import "@/app/globals.css";
-import { Inter, Newsreader } from "next/font/google";
-import type { Metadata } from "next";
+import "@/app/globals.css"
+import { Inter, Newsreader } from "next/font/google"
+import type { Metadata } from "next"
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-const newsreader = Newsreader({ subsets: ["latin"], display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
+const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", display: "swap" })
 
-const description = "Transform your travel memories into beautifully curated stories.";
+const description = "Your digital journal, built to treasure every memory you create."
 
 export const metadata: Metadata = {
   title: "Wandr - Your Digital Travel Journal",
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/logo.svg",
-        width: 200,
-        height: 50,
+        width: 33,
+        height: 32,
         alt: "Wandr Logo - Your Digital Travel Journal",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Wandr - Your Digital Travel Journal",
     description,
     images: ["/images/logo.svg"],
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
     shortcut: "/images/logo.svg",
     apple: "/images/logo.svg",
   },
-  // manifest: "/site.webmanifest",
   robots: { index: true, follow: true },
-};
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className={newsreader.className}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
+      <body className={`${inter.className} ${newsreader.className}`}>{children}</body>
     </html>
-  );
+  )
 }
+
