@@ -44,10 +44,8 @@ export default function LandingPage() {
 
   return (
     <main className="relative flex min-h-[100dvh] flex-col bg-neutral-950 selection:bg-neutral-800 selection:text-neutral-200">
-      {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 opacity-50" />
 
-      {/* Enhanced cursor gradient effect */}
       <div
         className="pointer-events-none fixed inset-0 z-50 transition-opacity duration-300"
         style={{
@@ -55,7 +53,6 @@ export default function LandingPage() {
         }}
       />
 
-      {/* Minimal navigation */}
       <nav className="relative z-40 flex items-center justify-between p-4">
         <motion.div
           className="flex items-center"
@@ -68,7 +65,7 @@ export default function LandingPage() {
               <img
                 src="/images/logo.svg"
                 alt="Wandr Logo"
-                className="h-7 w-7 transition-transform group-hover:rotate-12"
+                className="h-7 w-7 transition-transform "
               />
               <span className="ml-3 font-serif text-lg tracking-[0.2em] text-neutral-400 sm:text-base uppercase group-hover:text-neutral-300">
                 wλndr
@@ -86,9 +83,7 @@ export default function LandingPage() {
         </motion.div>
       </nav>
 
-      {/* Main content */}
       <div className="relative z-10 flex flex-1 flex-col">
-        {/* Hero section */}
         <motion.div
           className="flex flex-1 flex-col items-center justify-center px-4 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -96,10 +91,10 @@ export default function LandingPage() {
           transition={{ duration: 1 }}
         >
           <div className="max-w-2xl">
-            <h1 className="font-serif text-4xl font-extralight tracking-tight text-neutral-200 sm:text-5xl md:text-6xl">
+            <h1 className="font-serif text-4xl font-normal tracking-tight text-neutral-200 sm:text-5xl md:text-6xl">
               Memories Never Fade
             </h1>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-neutral-500">
+            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-neutral-500">
               Your digital time capsule. Capture, relive, and cherish every moment of your journey.
             </p>
 
@@ -115,7 +110,6 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        {/* Feature section */}
         <motion.div
           className="relative z-10 px-4 pb-20 pt-4"
           initial={{ opacity: 0, y: 20 }}
@@ -140,7 +134,6 @@ export default function LandingPage() {
                       }}
                       transition={{ duration: 0.2 }}
                     >
-                      {/* Vertical line for visual separation on desktop */}
                       {index !== features.length - 1 && (
                         <div className="absolute right-0 top-1/2 hidden h-12 w-px -translate-y-1/2 bg-neutral-800/50 sm:block" />
                       )}
@@ -168,7 +161,6 @@ export default function LandingPage() {
         </motion.div>
       </div>
 
-      {/* Enhanced footer */}
       <motion.footer
         className="relative z-40 border-t border-neutral-900 px-4 py-3"
         initial={{ opacity: 0 }}
@@ -176,8 +168,8 @@ export default function LandingPage() {
         transition={{ duration: 1, delay: 0.4 }}
       >
         <div className="mx-auto max-w-[90rem]">
-          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
-            <p className="text-[10px] font-light leading-relaxed text-neutral-700 sm:text-xs max-w-[280px] sm:max-w-xs text-center sm:text-left">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[10px] font-light leading-relaxed text-neutral-700 sm:text-xs text-center sm:text-left">
               Wandr is a digital journal that transforms your travel memories into beautifully curated stories
             </p>
             <p className="text-[10px] font-light tracking-widest text-neutral-600 sm:text-xs text-center sm:text-right">
@@ -193,6 +185,7 @@ export default function LandingPage() {
           </div>
         </div>
       </motion.footer>
+
     </main>
   )
 }
