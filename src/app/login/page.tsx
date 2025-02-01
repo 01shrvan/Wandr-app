@@ -29,7 +29,6 @@ export default function Login() {
 
     return (
         <div className="flex h-screen bg-neutral-950">
-            {/* Left side with lining effect */}
             <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-neutral-900">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-800 via-neutral-900 to-neutral-950 opacity-50" />
                 <div
@@ -44,7 +43,6 @@ export default function Login() {
                 </div>
             </div>
 
-            {/* Right side with login form */}
             <div className="w-full lg:w-1/2 flex items-center justify-center px-8">
                 <motion.div
                     className="w-full max-w-md"
