@@ -1,9 +1,9 @@
 import "@/app/globals.css"
-import { Inter, Newsreader } from "next/font/google"
+import { Inter, Handlee } from "next/font/google"
 import type { Metadata } from "next"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
-const newsreader = Newsreader({ subsets: ["latin"], variable: "--font-newsreader", display: "swap" })
+const handlee = Handlee({ weight: "400", subsets: ["latin"], variable: "--font-handlee", display: "swap" })
 
 const description = "Your digital journal, built to treasure every memory you create."
 
@@ -44,9 +44,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
-      <body className={`${inter.className} ${newsreader.className}`}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${handlee.variable}`}>
+      <body className={`${inter.className} ${handlee.className}`}>{children}</body>
     </html>
   )
 }
-

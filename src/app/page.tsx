@@ -90,10 +90,10 @@ export default function LandingPage() {
         >
           <div className="max-w-2xl">
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-neutral-100">
-              Relive Your Best Moments
+              Tell your story
             </h1>
             <p className="mx-auto mt-3 max-w-lg text-xs sm:text-sm leading-relaxed text-neutral-400">
-              A space where your journeys come alive. Relive, cherish, and share your stories like never before.
+              a minimalist space for your journey. capture moments, share experiences, preserve memories.
             </p>
 
             <motion.div className="mt-6">
