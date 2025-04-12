@@ -16,50 +16,44 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("Checking for existing user with email:", email);
-
     const { id: userId } = await db.transaction(async (txn) => {
-      // Checking if the user already exists
       const existingUser = await txn
         .select()
         .from(user)
         .where(eq(user.email, email))
         .limit(1);
 
-      console.log("Existing user check result:", existingUser);
-
       if (existingUser.length > 0) {
         throw new Error("User already exists.");
       }
 
-      // Hashing password
       const hashedPassword = await hash(password, 10);
-      console.log("Password hashed successfully.");
 
-      // Creating new user
       const newUser = await txn
         .insert(user)
-        .values({
-          email,
-          fullName,
-          password: hashedPassword,
-        })
+        .values({ email, fullName, password: hashedPassword })
         .returning();
-
-      console.log("New user created:", newUser);
 
       return newUser[0];
     });
 
-    // Signing access token
     const accessToken = await signToken({ userId });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       error: false,
-      user: { fullName, email },
-      accessToken,
       message: "Registration successful.",
+      user: { fullName, email }, 
     });
+
+    response.cookies.set("token", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, 
+    });
+
+    return response;
   } catch (error) {
     console.error("Error during registration:", error);
 

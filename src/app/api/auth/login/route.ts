@@ -37,12 +37,21 @@ export async function POST(request: Request) {
 
     const accessToken = await signToken({ userId: userData.id });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       error: false,
       message: "Login successful.",
-      user: { fullName: userData.fullName, email: userData.email },
-      accessToken,
+      user: { fullName: userData.fullName }, 
     });
+
+    response.cookies.set("token", accessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7, 
+    });
+
+    return response;
   } catch (error) {
     return NextResponse.json(
       { error: true, message: "Login failed." },
