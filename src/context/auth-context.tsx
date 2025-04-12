@@ -9,15 +9,9 @@ import {
 } from "react"
 import { useRouter } from "next/navigation"
 
-type User = {
-  fullName: string
-  email: string
-}
-
 type AuthContextType = {
-  user: User | null
   token: string | null
-  login: (token: string, user: User) => void
+  login: (token: string) => void
   logout: () => void
   isAuthenticated: boolean
 }
@@ -25,44 +19,33 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user data is in localStorage on initial load
+    // Check if token data is in localStorage on initial load
     const storedToken = localStorage.getItem("accessToken")
-    const storedUser = localStorage.getItem("user")
     
-    if (storedToken && storedUser) {
+    if (storedToken) {
       setToken(storedToken)
-      setUser(JSON.parse(storedUser))
     }
     
     setLoading(false)
   }, [])
 
-  const login = (newToken: string, newUser: User) => {
+  const login = (newToken: string) => {
     setToken(newToken)
-    setUser(newUser)
-    
     localStorage.setItem("accessToken", newToken)
-    localStorage.setItem("user", JSON.stringify(newUser))
   }
 
   const logout = () => {
     setToken(null)
-    setUser(null)
-    
     localStorage.removeItem("accessToken")
-    localStorage.removeItem("user")
-    
     router.push("/login")
   }
 
   const value = {
-    user,
     token,
     login,
     logout,
