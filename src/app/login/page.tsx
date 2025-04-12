@@ -4,11 +4,15 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Mail, Lock } from "lucide-react"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
@@ -21,10 +25,37 @@ export default function Login() {
         }
     }, [])
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Handle login logic here
-        console.log("Login submitted", { email, password })
+        setError("")
+        setLoading(true)
+
+        try {
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            })
+
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.message || "Login failed")
+            }
+
+            // Store token and user data in localStorage
+            localStorage.setItem("accessToken", data.accessToken)
+            localStorage.setItem("user", JSON.stringify(data.user))
+
+            // Redirect to dashboard or home page
+            router.push("/dashboard")
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "Login failed")
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -54,6 +85,11 @@ export default function Login() {
                         <img src="/images/logo.svg" alt="Wandr Logo" className="h-8 w-8" />
                         <span className="ml-2 text-xl font-semibold text-white">Wandr</span>
                     </Link>
+                    {error && (
+                        <div className="mb-4 p-3 rounded-md bg-red-900/50 text-red-200 text-sm">
+                            {error}
+                        </div>
+                    )}
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-neutral-300 mb-1">
@@ -92,10 +128,11 @@ export default function Login() {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full items-center justify-center rounded-md bg-white py-2 px-4 text-sm font-semibold text-black hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-600 focus:ring-offset-2 focus:ring-offset-neutral-950"
+                                disabled={loading}
+                                className="flex w-full items-center justify-center rounded-md bg-white py-2 px-4 text-sm font-semibold text-black hover:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-600 focus:ring-offset-2 focus:ring-offset-neutral-950 disabled:opacity-70"
                             >
-                                Sign In
-                                <ArrowRight className="ml-2 h-4 w-4" />
+                                {loading ? "Signing In..." : "Sign In"}
+                                {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
                             </button>
                         </div>
                     </form>
@@ -110,4 +147,3 @@ export default function Login() {
         </div>
     )
 }
-

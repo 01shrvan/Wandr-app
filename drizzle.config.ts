@@ -1,14 +1,21 @@
-import { config } from "dotenv";
-import { defineConfig } from "drizzle-kit";
+import type { Config } from "drizzle-kit";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-config({ path: ".env" });
+if (!process.env.TURSO_CONNECTION_URL) {
+  throw new Error("TURSO_CONNECTION_URL is not defined");
+}
 
-export default defineConfig({
-  schema: "./src/server/db/schema",
-  out: "./src/server/db/migrations",
-  dialect: "turso",
+if (!process.env.TURSO_AUTH_TOKEN) {
+  throw new Error("TURSO_AUTH_TOKEN is not defined");
+}
+
+export default {
+  schema: "./src/server/db/schema/*",
+  out: "./drizzle",
+  driver: "d1-http",
   dbCredentials: {
-    url: process.env.TURSO_CONNECTION_URL!,
-    authToken: process.env.TURSO_AUTH_TOKEN!,
+    url: process.env.TURSO_CONNECTION_URL,
+    authToken: process.env.TURSO_AUTH_TOKEN,
   },
-});
+} satisfies Config;
