@@ -16,17 +16,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { id: userId } = await db.transaction(async (txn) => {
-      const existingUser = await txn.query.user.findFirst({
-        where: eq(user.email, email),
-      });
+    console.log("Checking for existing user with email:", email);
 
-      if (existingUser) {
+    const { id: userId } = await db.transaction(async (txn) => {
+      // Checking if the user already exists
+      const existingUser = await txn
+        .select()
+        .from(user)
+        .where(eq(user.email, email))
+        .limit(1);
+
+      console.log("Existing user check result:", existingUser);
+
+      if (existingUser.length > 0) {
         throw new Error("User already exists.");
       }
 
+      // Hashing password
       const hashedPassword = await hash(password, 10);
+      console.log("Password hashed successfully.");
 
+      // Creating new user
       const newUser = await txn
         .insert(user)
         .values({
@@ -36,9 +46,12 @@ export async function POST(request: NextRequest) {
         })
         .returning();
 
+      console.log("New user created:", newUser);
+
       return newUser[0];
     });
 
+    // Signing access token
     const accessToken = await signToken({ userId });
 
     return NextResponse.json({
@@ -48,6 +61,8 @@ export async function POST(request: NextRequest) {
       message: "Registration successful.",
     });
   } catch (error) {
+    console.error("Error during registration:", error);
+
     if (error instanceof Error && error.message === "User already exists.") {
       return NextResponse.json(
         { error: true, message: error.message },
