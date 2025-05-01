@@ -26,18 +26,18 @@ export default function LandingPage() {
 
   const features = [
     {
-      title: "Calendar View",
-      description: "Effortlessly track your adventures in a beautifully organized timeline.",
+      title: "calendar view",
+      description: "effortlessly track your adventures in a beautifully organized timeline.",
       icon: Calendar,
     },
     {
-      title: "Media Gallery",
-      description: "Your photos and videos, all in one stunning, curated collection.",
+      title: "media gallery",
+      description: "your photos and videos, all in one stunning, curated collection.",
       icon: Image,
     },
     {
-      title: "Smart Search",
-      description: "Find that special moment instantly with intelligent search capabilities.",
+      title: "smart search",
+      description: "find that special moment instantly with intelligent search capabilities.",
       icon: Search,
     },
   ]
@@ -62,8 +62,8 @@ export default function LandingPage() {
         >
           <Link href="/" className="inline-flex items-center group">
             <div className="flex items-center">
-              <img src="/images/logo.svg" alt="Wandr Logo" className="h-6 w-6 sm:h-7 sm:w-7 transition-transform" />
-              <span className="ml-2 sm:ml-3 font-serif text-base sm:text-lg tracking-[0.2em] text-neutral-300 uppercase group-hover:text-neutral-200 flex items-center">
+              <img src="/images/logo.svg" alt="wandr logo" className="h-6 w-6 sm:h-7 sm:w-7 transition-transform" />
+              <span className="ml-2 sm:ml-3 font-serif text-base sm:text-lg tracking-[0.2em] text-neutral-300 group-hover:text-neutral-200 flex items-center">
                 wandr
               </span>
             </div>
@@ -73,7 +73,7 @@ export default function LandingPage() {
           <Link href="/login">
             <button className="group text-xs text-neutral-400 transition-colors hover:text-neutral-200 sm:text-sm">
               <span className="relative">
-                Sign In
+                sign in
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
               </span>
             </button>
@@ -90,7 +90,7 @@ export default function LandingPage() {
         >
           <div className="max-w-2xl">
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-neutral-100">
-              Tell your story
+              tell your story
             </h1>
             <p className="mx-auto mt-3 max-w-lg text-xs sm:text-sm leading-relaxed text-neutral-400">
               a minimalist space for your journey. capture moments, share experiences, preserve memories.
@@ -100,7 +100,7 @@ export default function LandingPage() {
               <Link href="/signup">
                 <button className="group relative text-xs sm:text-sm text-neutral-300 transition-colors hover:text-neutral-100">
                   <span className="flex items-center">
-                    Start Your Journey
+                    start your journey
                     <ArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                   </span>
                   <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-neutral-300 transition-all duration-300 ease-out group-hover:w-full" />
@@ -170,10 +170,10 @@ export default function LandingPage() {
         <div className="mx-auto max-w-[90rem]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[10px] sm:text-xs font-light leading-relaxed text-neutral-600 text-center sm:text-left">
-              Wandr: Your digital journal, built to treasure every memory you create.
+              wandr: your digital journal, built to treasure every memory you create.
             </p>
             <p className="text-[10px] sm:text-xs font-light tracking-widest text-neutral-500 text-center sm:text-right">
-              Made with <span className="text-neutral-400">♡</span> by
+              made with <span className="text-neutral-400">♡</span> by
               <Link
                 href="https://www.x.com/01shrvan"
                 target="_blank"
@@ -188,4 +188,3 @@ export default function LandingPage() {
     </main>
   )
 }
-
