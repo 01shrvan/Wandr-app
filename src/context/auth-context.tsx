@@ -1,11 +1,11 @@
 "use client"
 
-import { 
-  createContext, 
-  useContext, 
-  useState, 
-  useEffect, 
-  ReactNode 
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode
 } from "react"
 import { useRouter } from "next/navigation"
 
@@ -24,13 +24,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if token data is in localStorage on initial load
     const storedToken = localStorage.getItem("accessToken")
-    
+
     if (storedToken) {
       setToken(storedToken)
     }
-    
+
     setLoading(false)
   }, [])
 
